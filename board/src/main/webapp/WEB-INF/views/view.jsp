@@ -11,15 +11,36 @@
 	<script>
 		$(function(){
 			$("#modi").click(function(){
-				location.href = "modify?seq="+${post.seq};
+				location.href = "modify_pwd?seq="+${post.seq};
 			});
-		
+			$("#delete_btn").click(function(){
+				location.href = "delete?seq="+${post.seq};
+			});
+			
+			$("#back").click(function(){
+				self.location = "/list?"
+						+ "page=${scri.page}&perPageNum=${scri.perPageNum}"
+						+ "&searchType=${scri.searchType}&keyword=${scri.keyword}";
+			});
 			
 		})
 	</script>
 </head>
 <body>
 	<h1>글 상세페이지</h1>
+		<form role="form" method="post" autocomplete="off">
+			<input type="hidden" id="page" name="page" value="${scri.page }" readonly="readonly"/>
+			<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum }" readonly="readonly"/>
+			<input type="hidden" id="searchType" name="searchType" value="${scri.searchType }" readonly="readonly"/>
+			<input type="hidden" id="keyword" name="keyword" value="${scri.keyword }" readonly="readonly"/>
+			
+			<p>
+				<input type="hidden" id="seq" name="seq" value="${post.seq }" readonly="readonly"/>
+			</p>
+			
+		</form>
+	
+	
 		<form id="target" action="proc.jsp" method="post">
 			<input type="hidden" id="md" name="mode" value="modify">
 			<table>

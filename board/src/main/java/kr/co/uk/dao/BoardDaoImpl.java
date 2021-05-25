@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.uk.mapper.BoardMapper;
 import kr.co.uk.vo.BoardVO;
+import kr.co.uk.vo.Criteria;
 import kr.co.uk.vo.PageVO;
+import kr.co.uk.vo.SearchCriteria;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -18,33 +20,53 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Override
 	public List<BoardVO> getBoardList(RowBounds rowBounds) {
-		// TODO Auto-generated method stub
 		return mapper.getBoardList(rowBounds);
 	}
 	@Override
 	public void insertPost(BoardVO vo) {
-		// TODO Auto-generated method stub
 			mapper.insertPost(vo);
 	}
 	@Override
 	public BoardVO getPost(int seq) {
-		// TODO Auto-generated method stub
 		return mapper.getPost(seq);
 	}
 	@Override
 	public void updatePost(BoardVO vo) {
-		// TODO Auto-generated method stub
 		mapper.updatePost(vo);
 	}
 
 	@Override
 	public Integer getCount() {
-		// TODO Auto-generated method stub
 		return mapper.getCount();
 	}
 	@Override
-	public void deletePost(BoardVO vo) {
+	public void deletePost(int seq) {
+		mapper.deletePost(seq);
+	}
+	@Override
+	public Integer getPassword(int seq, String password) {
+		return mapper.getPassword(seq, password);
+	}
+	@Override
+	public List<BoardVO> listPage(Criteria cri) {
 		// TODO Auto-generated method stub
-		mapper.deletePost(vo);
+		return mapper.listPage(cri);
+	}
+	@Override
+	public int listCount() {
+		// TODO Auto-generated method stub
+		return mapper.listCount();
+	}
+	
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria scri) {
+		// TODO Auto-generated method stub
+		return mapper.listSearch(scri);
+	}
+	
+	@Override
+	public int countSearch(SearchCriteria scri) {
+		// TODO Auto-generated method stub
+		return mapper.countSearch(scri);
 	}
 }

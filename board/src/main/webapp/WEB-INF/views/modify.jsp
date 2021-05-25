@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -10,13 +11,31 @@
 		<script>
 			$(function(){
 				$("#modi").click(function(){
-					if(confirm("수정하시겠습니까?")) {
-						$("#target").submit();	
+					var fileCH = $("#isFile").val();
+					if($("#title").val() == "") {
+						alert("제목을 입력해주세요")
+						return;
+					}else if ($("#content").val() == ""){
+						alert("내용을 입력해주세요")
+						return
+					}else if ($("input[name=registuser").val() == "") {
+						alert("이름을 입력해주세요")
+						return
+					}else if ($(':radio[name="status"]:checked').length <1) {
+						alert("공개, 비공개 여부를 선택해주세요");
+						return
+					}else {
+						if(confirm("수정하시겠습니까?")) {
+							$("#target").submit();	
+						}
 					}
-				})
-								
-			})
-		
+				});
+						
+				$("#back").click(function(){
+					location.href="list";
+				});	
+						
+		})
 		</script>
 	</head>
 <body>
@@ -41,14 +60,14 @@
 				
 				<c:if test="${modifyBoard.status == 1}">
 				<tr>
-					<td>공개<input type="radio" name="status" id="public" value=${modifyBoard.status } checked ></td> 
-					<td>비공개<input type="radio" name="status" id="secret" value=${modifyBoard.status } onclick="return(false);"></td>
+					<td>공개<input type="radio" name="status" id="public" value="1" checked ></td> 
+					<td>비공개<input type="radio" name="status" id="secret" value="0"></td>
 				</tr>
 				</c:if>
 				<c:if test="${modifyBoard.status == 2}">
 				<tr>
-					<td>공개<input type="radio" name="status" id="public" value=${modifyBoard.status } onclick="return(false);"></td> 
-					<td>비공개<input type="radio" name="status" id="secret" value=${modifyBoard.status } checked ></td>
+					<td>공개<input type="radio" name="status" id="public" value="1"></td> 
+					<td>비공개<input type="radio" name="status" id="secret" value="0" checked ></td>
 				</tr>
 				</c:if>
 			</table>
@@ -56,7 +75,6 @@
 				<input type="button" value="수정" id="modi">  <!-- 버튼으로 -->
 				<input type="button" id="back" value="목록">
 				<input type="button" value="삭제" id="delete_btn">
-				
 	</form>	
 	
 </body>

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import kr.co.uk.dao.BoardDao;
 import kr.co.uk.vo.BoardVO;
+import kr.co.uk.vo.Criteria;
 import kr.co.uk.vo.PageVO;
+import kr.co.uk.vo.SearchCriteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -20,11 +22,8 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getBoardList(int page) {
 		
 		int page_listcnt = 10;
-		
 		int start = (page -1) * page_listcnt;
 		RowBounds rowBounds = new RowBounds(start, page_listcnt);
-		
-		
 		
 		return dao.getBoardList(rowBounds);
 	}
@@ -54,8 +53,37 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public void deletePost(BoardVO vo) {
+	public void deletePost(int seq) {
 		// TODO Auto-generated method stub
-		dao.deletePost(vo);
+		dao.deletePost(seq);
+	}
+	
+	@Override
+	public Integer getPassword(int seq, String password) {
+		// TODO Auto-generated method stub
+		return dao.getPassword(seq, password);
+	}
+	
+	@Override
+	public List<BoardVO> listPage(Criteria cri) {
+		// TODO Auto-generated method stub
+		return dao.listPage(cri);
+	}
+	@Override
+	public int listCount() {
+		// TODO Auto-generated method stub
+		return dao.listCount();
+	}
+	
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria scri) {
+		// TODO Auto-generated method stub
+		return dao.listSearch(scri);
+	}
+	
+	@Override
+	public int countSearch(SearchCriteria scri) {
+		// TODO Auto-generated method stub
+		return dao.countSearch(scri);
 	}
 }
